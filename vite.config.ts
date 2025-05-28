@@ -1,8 +1,5 @@
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { resolve } from "path";
 import { defineConfig } from "vite";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 import dts from "vite-plugin-dts";
 import react from "@vitejs/plugin-react";
@@ -12,6 +9,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [
     dts({
+      rollupTypes: true,
       tsconfigPath: "./tsconfig.app.json",
       exclude: ["./src/*.tsx"],
     }),

@@ -8,12 +8,6 @@
   "main": "./dist/hdc-ui.umd.cjs",
   "module": "./dist/hdc-ui.js",
   "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/hdc-ui.js",
-      "require": "./dist/hdc-ui.umd.cjs"
-    }
-  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

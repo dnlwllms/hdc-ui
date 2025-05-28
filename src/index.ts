@@ -1,5 +1,3 @@
 import "./index.css";
 
-import Button from "./components/ui/button";
-
-export default { Button };
+export * from "./components/ui/button";
