@@ -36,4 +36,10 @@ export default defineConfig({
       },
     },
   },
+  resolve: {
+    alias: {
+      process: "process/browser",
+      "@": resolve(__dirname, "./src"),
+    },
+  },
 });
