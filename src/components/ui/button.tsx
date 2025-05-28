@@ -4,8 +4,6 @@ import { type ButtonHTMLAttributes, type Ref } from "react";
 
 import { cn } from "../../utils";
 
-export type ButtonProps = unknown;
-
 const buttonVariants = cva(
   "cursor-pointer disabled:cursor-default border-[1px] disabled:bg-gray-200 disabled:text-white transition",
   {
@@ -35,16 +33,12 @@ const buttonVariants = cva(
   }
 );
 
+export interface ButtonProps
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "color">,
+    VariantProps<typeof buttonVariants> {}
+
 export function Button(
-  {
-    className,
-    color,
-    size,
-    shape,
-    ...props
-  }: ButtonProps &
-    ButtonHTMLAttributes<HTMLButtonElement> &
-    VariantProps<typeof buttonVariants>,
+  { className, color, size, shape, ...props }: ButtonProps,
   ref?: Ref<HTMLButtonElement>
 ) {
   return (

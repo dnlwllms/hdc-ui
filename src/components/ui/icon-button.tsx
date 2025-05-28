@@ -5,10 +5,6 @@ import * as Lucide from "lucide-react";
 
 import { cn } from "../../utils";
 
-export type IconButtonProps = {
-  icon: keyof typeof Lucide.icons;
-};
-
 const iconButtonVariants = cva(
   "flex items-center justify-center cursor-pointer disabled:cursor-default text-gray-900 hover:text-gray-800 rounded-full disabled:text-gray-200 transition disabled:hover:bg-white",
   {
@@ -29,17 +25,14 @@ const iconButtonVariants = cva(
   }
 );
 
+export interface IconButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof iconButtonVariants> {
+  icon: keyof typeof Lucide.icons;
+}
+
 export function IconButton(
-  {
-    className,
-    children,
-    size,
-    icon,
-    state,
-    ...props
-  }: IconButtonProps &
-    ButtonHTMLAttributes<HTMLButtonElement> &
-    VariantProps<typeof iconButtonVariants>,
+  { className, children, size, icon, state, ...props }: IconButtonProps,
   ref?: Ref<HTMLButtonElement>
 ) {
   let iconSize = 0;
