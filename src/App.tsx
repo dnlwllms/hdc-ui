@@ -1,4 +1,4 @@
-import { TextButton } from "./components/ui/text-button";
+import { TextButton } from "@/lib/components/ui/text-button";
 
 function App() {
   return (

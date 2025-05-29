@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { type ButtonHTMLAttributes, type Ref } from "react";
 
-import { cn } from "../../utils";
+import { cn } from "@/lib/utils";
 
 const textButtonVariants = cva(
   "flex gap-1 line-height- items-center cursor-pointer disabled:cursor-default disabled:text-gray-200 transition",

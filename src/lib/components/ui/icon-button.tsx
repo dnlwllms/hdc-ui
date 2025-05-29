@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { type ButtonHTMLAttributes, type Ref } from "react";
 import * as Lucide from "lucide-react";
 
-import { cn } from "../../utils";
+import { cn } from "@/lib/utils";
 
 const iconButtonVariants = cva(
   "flex items-center justify-center cursor-pointer disabled:cursor-default text-gray-900 hover:text-gray-800 rounded-full disabled:text-gray-200 transition disabled:hover:bg-white",

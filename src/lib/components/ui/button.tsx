@@ -1,8 +1,8 @@
-import { cva, type VariantProps } from "class-variance-authority";
-
 import { type ButtonHTMLAttributes, type Ref } from "react";
 
-import { cn } from "../../utils";
+import { cva, type VariantProps } from "class-variance-authority";
+
+import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
   "cursor-pointer disabled:cursor-default border-[1px] disabled:bg-gray-200 disabled:text-white transition",
@@ -38,13 +38,13 @@ export interface ButtonProps
     VariantProps<typeof buttonVariants> {}
 
 export function Button(
-  { className, color, size, shape, ...props }: ButtonProps,
+  { color, shape, size, className, ...props }: ButtonProps,
   ref?: Ref<HTMLButtonElement>
 ) {
   return (
     <button
       ref={ref}
-      className={cn(buttonVariants({ color, size, shape, className }))}
+      className={cn(buttonVariants({ color, shape, size, className }))}
       {...props}
     ></button>
   );
