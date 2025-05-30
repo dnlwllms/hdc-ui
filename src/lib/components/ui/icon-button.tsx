@@ -25,6 +25,19 @@ const iconButtonVariants = cva(
   }
 );
 
+const lucideVariants = cva("", {
+  variants: {
+    size: {
+      xs: "w-4 h-4",
+      sm: "w-6 h-6",
+      md: "w-6 h-6",
+    },
+  },
+  defaultVariants: {
+    size: "sm",
+  },
+});
+
 export interface IconButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof iconButtonVariants> {
@@ -32,23 +45,9 @@ export interface IconButtonProps
 }
 
 export function IconButton(
-  { className, children, size, icon, state, ...props }: IconButtonProps,
+  { className, children, size = "sm", icon, state, ...props }: IconButtonProps,
   ref?: Ref<HTMLButtonElement>
 ) {
-  let iconSize = 0;
-
-  switch (size) {
-    case "xs": {
-      iconSize = 16;
-      break;
-    }
-    case "sm":
-    case "md": {
-      iconSize = 24;
-      break;
-    }
-  }
-
   const Comp = Lucide[icon];
 
   return (
@@ -63,7 +62,7 @@ export function IconButton(
       )}
       {...props}
     >
-      {children || <Comp width={iconSize} height={iconSize} />}
+      {children || <Comp className={lucideVariants({ size })} />}
     </button>
   );
 }
