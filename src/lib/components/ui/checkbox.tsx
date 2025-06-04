@@ -46,7 +46,7 @@ function Checkbox({ className, size, ...props }: CheckboxProps) {
   return (
     <CheckboxPrimitive.Root
       data-slot="checkbox"
-      className={cn(checkboxVariants({ size }), "", className)}
+      className={cn(checkboxVariants({ size }), className)}
       {...props}
     >
       <CheckboxPrimitive.Indicator
