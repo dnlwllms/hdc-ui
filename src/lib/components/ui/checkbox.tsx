@@ -8,8 +8,11 @@ import { CheckIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
+const disabledStyle =
+  "disabled:border-gray-200 disabled:bg-gray-100 data-[state=checked]:disabled:border-gray-200 data-[state=checked]:disabled:bg-gray-100 data-[state=checked]:disabled:text-gray-200";
+
 const checkboxVariants = cva(
-  "border border-gray-500 rounded-xs data-[state=checked]:bg-gray-900 data-[state=checked]:border-gray-900 data-[state=checked]:text-white",
+  `border border-gray-500 rounded-xs data-[state=checked]:bg-gray-900 data-[state=checked]:border-gray-900 data-[state=checked]:text-white ${disabledStyle}`,
   {
     variants: {
       size: {
