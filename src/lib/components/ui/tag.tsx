@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-const TagVariants = cva(
+const tagVariants = cva(
   "inline-flex justify-center items-center transition text-gray-500 body03M border border-gray-200 h-6 px-2",
   {
     variants: {
@@ -12,7 +12,6 @@ const TagVariants = cva(
         gray: "bg-gray-200",
         outlined: "bg-white",
       },
-
       shape: {
         box: "rounded-sm",
         capsule: "rounded-full",
@@ -27,7 +26,7 @@ const TagVariants = cva(
 
 export interface TagProps
   extends Omit<HTMLAttributes<HTMLSpanElement>, "color">,
-    VariantProps<typeof TagVariants> {}
+    VariantProps<typeof tagVariants> {}
 
 export function Tag(
   { color, shape, className, ...props }: TagProps,
@@ -36,7 +35,7 @@ export function Tag(
   return (
     <span
       ref={ref}
-      className={cn(TagVariants({ color, shape, className }))}
+      className={cn(tagVariants({ color, shape, className }))}
       {...props}
     />
   );
