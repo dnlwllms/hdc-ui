@@ -1,6 +1,6 @@
 "use client";
 
-import { type ComponentPropsWithoutRef, type Ref } from "react";
+import { type ComponentPropsWithoutRef, type Ref, type ReactNode } from "react";
 
 import { cva, type VariantProps } from "class-variance-authority";
 import { Checkbox as CheckboxPrimitive } from "radix-ui";
@@ -63,4 +63,50 @@ function Checkbox(
   );
 }
 
-export { Checkbox };
+const checkboxButtonVariants = cva("", {
+  variants: {
+    size: {
+      xs: "body03R",
+      sm: "body02M",
+    },
+  },
+  defaultVariants: {
+    size: "sm",
+  },
+});
+
+export interface CheckboxButtonProps
+  extends ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>,
+    VariantProps<typeof checkboxButtonVariants> {
+  children?: ReactNode;
+  htmlFor?: string;
+  name?: string;
+}
+
+function CheckboxButton({
+  size,
+  children,
+  htmlFor,
+  ...props
+}: CheckboxButtonProps) {
+  return (
+    <div className="inline-flex items-center gap-x-1 group">
+      <Checkbox
+        className="group-hover:border-gray-900 duration-300 transition-[border-color] peer"
+        size={size}
+        {...props}
+      />
+      <label
+        htmlFor={htmlFor}
+        className={cn(
+          checkboxButtonVariants({ size }),
+          "peer-disabled:text-gray-200"
+        )}
+      >
+        {children}
+      </label>
+    </div>
+  );
+}
+
+export { Checkbox, CheckboxButton };
