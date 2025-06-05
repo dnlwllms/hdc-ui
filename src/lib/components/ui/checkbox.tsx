@@ -1,6 +1,6 @@
 "use client";
 
-import type { ComponentPropsWithoutRef } from "react";
+import { type ComponentPropsWithoutRef, type Ref } from "react";
 
 import { cva, type VariantProps } from "class-variance-authority";
 import { Checkbox as CheckboxPrimitive } from "radix-ui";
@@ -42,10 +42,14 @@ export interface CheckboxProps
   extends ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>,
     VariantProps<typeof checkboxVariants> {}
 
-function Checkbox({ className, size, ...props }: CheckboxProps) {
+function Checkbox(
+  { className, size, ...props }: CheckboxProps,
+  ref?: Ref<HTMLButtonElement>
+) {
   return (
     <CheckboxPrimitive.Root
       data-slot="checkbox"
+      ref={ref}
       className={cn(checkboxVariants({ size }), className)}
       {...props}
     >
