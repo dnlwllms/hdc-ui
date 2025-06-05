@@ -40,6 +40,8 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  --default-font-family: var(--primary-font-fmaily);
 }
 
 :root {
@@ -79,7 +81,7 @@
   --font-bold: 700;
   --font-medium: 400;
   --font-regular: 200;
-  --primary-font-fmaily: "Pretendard";
+  --primary-font-fmaily: Pretendard;
 }
 
 .dark {
