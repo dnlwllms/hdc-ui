@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 
 import { Select as SelectPrimitive } from "radix-ui";
@@ -22,7 +20,10 @@ function SelectValue({
 }
 
 const selectTriggerVariants = cva(
-  "group border border-gray-200 data-[placeholder]:text-gray-900 data-[placeholder]:disabled:text-gray-200 flex w-fit items-center justify-between gap-x-1 bg-transparent whitespace-nowrap outline-none [&_svg]:pointer-events-none [&_svg]:shrink-0 disabled:bg-gray-100 disabled:text-gray-200",
+  cn(
+    "group border border-gray-200 data-[placeholder]:text-gray-900 data-[placeholder]:disabled:text-gray-200 flex w-fit items-center justify-between gap-x-1 bg-transparent whitespace-nowrap outline-none [&_svg]:pointer-events-none [&_svg]:shrink-0 disabled:bg-gray-100 disabled:text-gray-200",
+    "*:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2"
+  ),
   {
     variants: {
       size: {
