@@ -1,12 +1,12 @@
-import { type HTMLAttributes, type Ref, createElement } from "react";
-import * as Lucide from "lucide-react";
+import { type HTMLAttributes, type Ref } from "react";
+import { CircleAlert, Inbox } from "lucide-react";
 
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
 const emptyVariants = cva(
-  "flex flex-col items-center justify-center text-gray-500 py-2",
+  "inline-flex flex-col items-center justify-center text-gray-500 py-2",
   {
     variants: {
       size: {
@@ -20,7 +20,7 @@ const emptyVariants = cva(
   }
 );
 
-const iconsVariants = cva("text-inherit", {
+const iconVariants = cva("", {
   variants: {
     size: {
       md: "w-4 h-4",
@@ -35,20 +35,12 @@ const iconsVariants = cva("text-inherit", {
 export interface EmptyProps
   extends HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof emptyVariants> {
-  icons?: keyof typeof Lucide.icons;
-  iconsClassName?: string;
+  icon?: "warning" | "box";
   description?: string;
 }
 
 function Empty(
-  {
-    size,
-    icons,
-    description = "Description",
-    className,
-    iconsClassName,
-    ...props
-  }: EmptyProps,
+  { size, icon, description = "Description", className, ...props }: EmptyProps,
   ref?: Ref<HTMLDivElement>
 ) {
   return (
@@ -57,10 +49,10 @@ function Empty(
       className={cn(emptyVariants({ size, className }))}
       {...props}
     >
-      {icons &&
-        createElement(Lucide.icons[icons as keyof typeof Lucide.icons], {
-          className: cn(iconsVariants({ size }), iconsClassName),
-        })}
+      {icon === "warning" && (
+        <CircleAlert className={cn(iconVariants({ size }))} />
+      )}
+      {icon === "box" && <Inbox className={cn(iconVariants({ size }))} />}
       <p title={description}>{description}</p>
     </div>
   );
