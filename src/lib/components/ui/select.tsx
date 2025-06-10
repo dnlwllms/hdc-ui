@@ -21,8 +21,9 @@ function SelectValue({
 
 const selectTriggerVariants = cva(
   cn(
-    "group border border-gray-200 data-[placeholder]:text-gray-900 data-[placeholder]:disabled:text-gray-200 flex w-fit items-center justify-between gap-x-1 bg-transparent whitespace-nowrap outline-none [&_svg]:pointer-events-none [&_svg]:shrink-0 disabled:bg-gray-100 disabled:text-gray-200",
-    "*:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2"
+    "group border border-gray-200 data-[placeholder]:text-gray-900 data-[placeholder]:disabled:text-gray-200 flex w-fit items-center justify-between gap-x-1 bg-transparent whitespace-nowrap outline-none [&_svg]:pointer-events-none [&_svg]:shrink-0 disabled:bg-gray-100 disabled:text-gray-200 transition-[box-shadow]",
+    "*:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2",
+    "focus-visible:outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
   ),
   {
     variants: {
@@ -61,7 +62,7 @@ function SelectTrigger({
     >
       {children}
       <SelectPrimitive.Icon asChild>
-        <ChevronDownIcon className="size-3.5 group-data-[size=lg]:size-4 text-gray-900 group-data-[state=open]:rotate-180 transition-[rotate] duration-300 group-disabled:text-gray-200" />
+        <ChevronDownIcon className="size-3.5 group-data-[size=lg]:size-4 group-data-[state=open]:rotate-180 transition-[rotate] duration-300 group-disabled:text-gray-200" />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   );
@@ -98,7 +99,6 @@ function SelectContent({
         data-slot="select-content"
         className={cn(
           selectContentVariants({ size }),
-
           position === "popper" &&
             "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
           className
