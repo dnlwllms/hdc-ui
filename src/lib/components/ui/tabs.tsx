@@ -1,43 +1,56 @@
 import * as React from "react";
 import { Tabs as TabsPrimitive } from "radix-ui";
-
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-type TabTextSizeType = "sm" | "md" | "lg";
-type TabBoxSizeType = "xs" | "sm" | "md";
-type TabBaseProps = React.ComponentProps<typeof TabsPrimitive.List> &
-  VariantProps<typeof tabListVariants>;
+type TabMode = "box" | "text" | "vertical";
 
-type TabValidType =
-  | (TabBaseProps & { mode?: "box"; size?: TabBoxSizeType })
-  | (TabBaseProps & { mode?: "text"; size?: TabTextSizeType })
-  | (TabBaseProps & { mode?: "vertical"; size?: never });
+type TabSizeType = "xs" | "sm" | "md" | "lg";
+
+type TabsBoxProps = {
+  mode?: "box" | undefined;
+  size?: Exclude<TabSizeType, "lg">;
+};
+
+type TabsTextProps = {
+  mode: "text";
+  size?: Exclude<TabSizeType, "xs">;
+};
+
+type TabsVerticalProps = {
+  mode: "vertical";
+  size?: never;
+};
+
+type TabsVariantProps = TabsBoxProps | TabsTextProps | TabsVerticalProps;
+
+type TabsContextType = {
+  mode: TabMode;
+  size?: TabSizeType;
+};
+
+const TabsContext = React.createContext<TabsContextType | null>(null);
+
+function useTabsContext() {
+  const context = React.useContext(TabsContext);
+  if (!context) {
+    throw new Error("<Tabs> 내부에서만 사용할 수 있는 컴포넌트입니다.");
+  }
+  return context;
+}
 
 const tabsVariants = cva("flex gap-2", {
   variants: {
     mode: {
-      horizontal: "flex-col",
+      box: "flex-col",
+      text: "flex-col",
       vertical: "flex-row",
     },
   },
   defaultVariants: {
-    mode: "horizontal",
+    mode: "box",
   },
 });
-
-type TabsProps = React.ComponentProps<typeof TabsPrimitive.Root> &
-  VariantProps<typeof tabsVariants>;
-
-function Tabs({ mode, className, ...props }: TabsProps) {
-  return (
-    <TabsPrimitive.Root
-      data-slot="tabs"
-      className={cn(tabsVariants({ mode }), className)}
-      {...props}
-    />
-  );
-}
 
 const tabListVariants = cva("inline-flex w-fit items-center justify-center", {
   variants: {
@@ -58,57 +71,14 @@ const tabListVariants = cva("inline-flex w-fit items-center justify-center", {
     mode: "box",
   },
   compoundVariants: [
-    {
-      mode: "text",
-      size: "sm",
-      class: "h-8",
-    },
-    {
-      mode: "text",
-      size: "md",
-      class: "h-10",
-    },
-    {
-      mode: "text",
-      size: "lg",
-      class: "h-12",
-    },
-    {
-      mode: "box",
-      size: "xs",
-      class: "h-8 rounded-sm",
-    },
-    {
-      mode: "box",
-      size: "sm",
-      class: "h-10 rounded-md",
-    },
-    {
-      mode: "box",
-      size: "md",
-      class: "h-12 rounded-lg",
-    },
+    { mode: "text", size: "sm", class: "h-8" },
+    { mode: "text", size: "md", class: "h-10" },
+    { mode: "text", size: "lg", class: "h-12" },
+    { mode: "box", size: "xs", class: "h-8 rounded-sm" },
+    { mode: "box", size: "sm", class: "h-10 rounded-md" },
+    { mode: "box", size: "md", class: "h-12 rounded-lg" },
   ],
 });
-
-type TabsListProps = React.ComponentProps<typeof TabsPrimitive.List> &
-  VariantProps<typeof tabListVariants> &
-  TabValidType;
-
-function TabsList({
-  className,
-  mode = "box",
-  size = "md",
-  ...props
-}: TabsListProps) {
-  return (
-    <TabsPrimitive.List
-      data-slot="tabs-list"
-      className={cn(tabListVariants({ mode, size }), className)}
-      {...props}
-    />
-  );
-}
 
 const tabsTriggerVariants = cva(
   cn(
@@ -142,50 +112,51 @@ const tabsTriggerVariants = cva(
       mode: "box",
     },
     compoundVariants: [
-      {
-        mode: "text",
-        size: "sm",
-        class: "body02M",
-      },
-      {
-        mode: "text",
-        size: "md",
-        class: "body02M",
-      },
-      {
-        mode: "text",
-        size: "lg",
-        class: "body01M",
-      },
-      {
-        mode: "box",
-        size: "xs",
-        class: "px-2 rounded-sm body03R",
-      },
-      {
-        mode: "box",
-        size: "sm",
-        class: "px-2 rounded-md body02M",
-      },
-      {
-        mode: "box",
-        size: "md",
-        class: "px-4 rounded-lg body02M",
-      },
+      { mode: "text", size: "sm", class: "body02M" },
+      { mode: "text", size: "md", class: "body02M" },
+      { mode: "text", size: "lg", class: "body01M" },
+      { mode: "box", size: "xs", class: "px-2 rounded-sm body03R" },
+      { mode: "box", size: "sm", class: "px-2 rounded-md body02M" },
+      { mode: "box", size: "md", class: "px-4 rounded-lg body02M" },
     ],
   }
 );
 
-type TabsTriggerProps = React.ComponentProps<typeof TabsPrimitive.Trigger> &
-  VariantProps<typeof tabsTriggerVariants> &
-  TabValidType;
+type TabsProps = React.ComponentProps<typeof TabsPrimitive.Root> &
+  VariantProps<typeof tabsVariants> &
+  TabsVariantProps;
+
+function Tabs({ mode = "box", size = "md", className, ...props }: TabsProps) {
+  return (
+    <TabsContext.Provider value={{ mode, size }}>
+      <TabsPrimitive.Root
+        data-slot="tabs"
+        className={cn(tabsVariants({ mode }), className)}
+        {...props}
+      />
+    </TabsContext.Provider>
+  );
+}
+
+function TabsList({
+  className,
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.List>) {
+  const { mode, size } = useTabsContext();
+  return (
+    <TabsPrimitive.List
+      data-slot="tabs-list"
+      className={cn(tabListVariants({ mode, size }), className)}
+      {...props}
+    />
+  );
+}
 
 function TabsTrigger({
   className,
-  mode = "box",
-  size = "md",
   ...props
-}: TabsTriggerProps) {
+}: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
+  const { mode, size } = useTabsContext();
   return (
     <TabsPrimitive.Trigger
       data-slot="tabs-trigger"
