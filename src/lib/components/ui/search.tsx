@@ -8,7 +8,7 @@ import { Search as SearchIcon } from "lucide-react";
 
 const searchVariants = cva(
   cn(
-    "border-gray-200 border text-gray-900 placeholder:text-gray-500 disabled:border-gray-200  disabled:text-gray-200 transition-[box-shadow]",
+    "border-gray-200 border text-gray-900 placeholder:text-gray-500 disabled:border-gray-200 disabled:text-gray-200 transition-[box-shadow]",
     "focus-visible:outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
   ),
   {
