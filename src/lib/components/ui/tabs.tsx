@@ -52,33 +52,36 @@ const tabsVariants = cva("flex gap-2", {
   },
 });
 
-const tabListVariants = cva("inline-flex w-fit items-center justify-center", {
-  variants: {
-    size: {
-      xs: "",
-      sm: "",
-      md: "",
-      lg: "",
+const tabListVariants = cva(
+  "inline-flex w-full items-center justify-start overflow-x-auto",
+  {
+    variants: {
+      size: {
+        xs: "",
+        sm: "",
+        md: "",
+        lg: "",
+      },
+      mode: {
+        text: "pl-2 border-b border-b-gray-200",
+        box: "gap-x-1 p-1 bg-gray-200",
+        vertical: "flex flex-col justify-start",
+      },
     },
-    mode: {
-      text: "pl-2 border-b border-b-gray-200",
-      box: "gap-x-1 p-1 bg-gray-200",
-      vertical: "flex flex-col justify-start",
+    defaultVariants: {
+      size: "md",
+      mode: "box",
     },
-  },
-  defaultVariants: {
-    size: "md",
-    mode: "box",
-  },
-  compoundVariants: [
-    { mode: "text", size: "sm", class: "h-8" },
-    { mode: "text", size: "md", class: "h-10" },
-    { mode: "text", size: "lg", class: "h-12" },
-    { mode: "box", size: "xs", class: "h-8 rounded-sm" },
-    { mode: "box", size: "sm", class: "h-10 rounded-md" },
-    { mode: "box", size: "md", class: "h-12 rounded-lg" },
-  ],
-});
+    compoundVariants: [
+      { mode: "text", size: "sm", class: "h-8" },
+      { mode: "text", size: "md", class: "h-10" },
+      { mode: "text", size: "lg", class: "h-12" },
+      { mode: "box", size: "xs", class: "h-8 rounded-sm" },
+      { mode: "box", size: "sm", class: "h-10 rounded-md" },
+      { mode: "box", size: "md", class: "h-12 rounded-lg" },
+    ],
+  }
+);
 
 const tabsTriggerVariants = cva(
   cn(
