@@ -85,7 +85,7 @@ const tabListVariants = cva(
 
 const tabsTriggerVariants = cva(
   cn(
-    "text-gray-500 data-[state=active]:text-gray-900 flex items-center justify-center h-full",
+    "text-gray-500 data-[state=active]:text-gray-900 flex items-center justify-center h-full whitespace-nowrap",
     "disabled:opacity-50 disabled:pointer-events-none",
     "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring focus-visible:ring-[3px] focus-visible:outline-1"
   ),
