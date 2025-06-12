@@ -52,7 +52,7 @@ const tabsVariants = cva("flex gap-2", {
   },
 });
 
-const tabListVariants = cva("inline-flex w-fit items-center", {
+const tabListVariants = cva("inline-flex w-full overflow-x-auto items-center", {
   variants: {
     size: {
       xs: "",
