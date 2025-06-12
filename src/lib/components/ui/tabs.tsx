@@ -52,7 +52,7 @@ const tabsVariants = cva("flex gap-2", {
   },
 });
 
-const tabListVariants = cva("inline-flex w-fit items-center justify-center", {
+const tabListVariants = cva("inline-flex w-fit items-center", {
   variants: {
     size: {
       xs: "",
@@ -61,7 +61,7 @@ const tabListVariants = cva("inline-flex w-fit items-center justify-center", {
       lg: "",
     },
     mode: {
-      text: "pl-2 border-b border-b-gray-200",
+      text: "pl-2 pt-1 border-b border-b-gray-200",
       box: "gap-x-1 p-1 bg-gray-200",
       vertical: "flex flex-col justify-start",
     },
@@ -71,12 +71,9 @@ const tabListVariants = cva("inline-flex w-fit items-center justify-center", {
     mode: "box",
   },
   compoundVariants: [
-    { mode: "text", size: "sm", class: "h-8" },
-    { mode: "text", size: "md", class: "h-10" },
-    { mode: "text", size: "lg", class: "h-12" },
-    { mode: "box", size: "xs", class: "h-8 rounded-sm" },
-    { mode: "box", size: "sm", class: "h-10 rounded-md" },
-    { mode: "box", size: "md", class: "h-12 rounded-lg" },
+    { mode: "box", size: "xs", class: "rounded-sm" },
+    { mode: "box", size: "sm", class: "rounded-md" },
+    { mode: "box", size: "md", class: "rounded-lg" },
   ],
 });
 
@@ -102,7 +99,7 @@ const tabsTriggerVariants = cva(
           "data-[state=active]:after:absolute after:bottom-[-1px] data-[state=active]:after:z-index-1",
           "data-[state=active]:after:bg-gray-900"
         ),
-        box: "data-[state=active]:bg-white",
+        box: "data-[state=active]:bg-white flex-1",
         vertical:
           "gap-x-2 justify-start px-6 py-2 body02M w-full min-w-[224px] h-10 border-r-2 border-r-gray-200 data-[state=active]:border-r-gray-900",
       },
@@ -112,12 +109,12 @@ const tabsTriggerVariants = cva(
       mode: "box",
     },
     compoundVariants: [
-      { mode: "text", size: "sm", class: "body02M" },
-      { mode: "text", size: "md", class: "body02M" },
-      { mode: "text", size: "lg", class: "body01M" },
-      { mode: "box", size: "xs", class: "px-2 rounded-sm body03R" },
-      { mode: "box", size: "sm", class: "px-2 rounded-md body02M" },
-      { mode: "box", size: "md", class: "px-4 rounded-lg body02M" },
+      { mode: "text", size: "sm", class: "body02M h-7" },
+      { mode: "text", size: "md", class: "body02M h-9" },
+      { mode: "text", size: "lg", class: "body01M h-11" },
+      { mode: "box", size: "xs", class: "px-2 h-8 rounded-sm body03R" },
+      { mode: "box", size: "sm", class: "px-2 h-10 rounded-md body02M" },
+      { mode: "box", size: "md", class: "px-4 h-12 rounded-lg body02M" },
     ],
   }
 );
